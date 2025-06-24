@@ -1,0 +1,43 @@
+auth) frontend -> continue with google 
+backend -> register garnu paryo 
+
+
+gmail basant@gmail.com
+server ma rakhnu paryo
+
+cors :  whlist.
+= == === 
+restful
+middleware
+
+
+= suggestion:
+
+7 layer network. 
+
+https
+http
+
+underhood.
+public signature.
+
+
+server => client
+
+client => server(application: js, php, py) - db(postgres, sql ,mongo) -- 
+- cors. 
+https : public.
+
+rsa, sh125
+
+
+browser reset 
+continue with google 
+backend user.findone();
+
+user already exist 
+ - user token -> google token.
+login
+
+user.findOne -> 
+
