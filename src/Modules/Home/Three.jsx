@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../Context/CartContext";
 function Three() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [subjectList, setSubjectList] = useState([]);
   const [filterSubject, setFilterSubject] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { dispatch } = useContext(CartContext);
 
   const getSubject = async () => {
     let response = await fetch("https://dummyjson.com/recipes?limit=29");
@@ -70,9 +72,6 @@ function Three() {
           <div
             key={course.id}
             className="bg-white rounded-[10px]  shadow w-[250px] flex flex-col transition-all duration-200"
-            onClick={() => {
-              navigate("/productdescriptionpage", { state: course });
-            }}
           >
             <img
               src={course.image}
@@ -95,18 +94,37 @@ function Three() {
               <p>Type {course.cuisine}</p>
             </div>
             <div className="flex justify-between my-2  px-3">
-              <button className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3 ">
+              <button
+                onClick={() => {
+                  navigate("/productdescriptionpage", { state: course });
+                }}
+                className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3 "
+              >
                 <p className="text-[#01295c] ">
                   <FaShoppingCart />
                 </p>
                 Add To Cart
               </button>
-              <p className="text-red-700">
+              <button
+                className="cursor-pointer"
+                onClick={() => {
+                  dispatch({
+                    type: "AddToCart",
+                    payload: course,
+                  });
+                  navigate("/wishlist");
+                }}
+              >
                 <FaRegHeart />
-              </p>
+              </button>
             </div>
             <div className="border-t-2 flex justify-center border-gray-400">
-              <button className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]">
+              <button
+                onClick={() => {
+                  navigate("/coursedescription", { state: course });
+                }}
+                className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]"
+              >
                 View Course
               </button>
             </div>

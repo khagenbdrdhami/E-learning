@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,9 @@ function Cart() {
     (acc, item) => acc + item.caloriesPerServing * 10 * item.qty,
     0
   );
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 py-10">
@@ -109,6 +112,13 @@ function Cart() {
           <div className="text-center py-20 text-gray-600">
             <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
             <p>Add some courses to get started!</p>
+            <button
+            onClick={()=>(
+              navigate("/courses")
+            )}
+             className="px-5 mt-5 text-white hover:bg-amber-500 py-1 bg-[#e2bc51] text-xl rounded-2xl">
+              Explore Our Courses
+            </button>
           </div>
         )}
       </div>

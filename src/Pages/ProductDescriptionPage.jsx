@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { FaFacebookF, FaInstagram, FaLinkedinIn,FaHeart } from "react-icons/fa";
@@ -8,6 +8,9 @@ export default function ProductDescriptionPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const {dispatch}=useContext(CartContext);
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="max-w-6xl mx-auto p-4 font-sans">

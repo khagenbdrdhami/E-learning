@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../Context/CartContext";
 
 function Three() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [subjectList, setSubjectList] = useState([]);
   const [filterSubject, setFilterSubject] = useState([]);
   const [categories, setCategories] = useState([]);
+  const {dispatch}=useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -33,16 +36,19 @@ function Three() {
   useEffect(() => {
     getSubject();
   }, []);
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <div className=" min-h-screen px-10 py-10">
-      <h2 className="text-3xl font-bold mb-8 text-left sticky h-fit top-10 text-gray-800">
+    <div className=" min-h-screen px-10 z-0 py-10">
+      <h2 className="text-3xl font-bold mb-8 text-left sticky h-fit top-20 text-gray-800">
         Our Courses
       </h2>
 
       <div className="flex gap-8">
         {/* Sidebar */}
-        <div className="w-64 bg-white shadow rounded-lg p-4 h-fit sticky top-25">
+        <div className="w-64 bg-white shadow rounded-lg p-4 h-fit sticky top-35">
           <h3 className="text-lg font-semibold mb-4">Category</h3>
           <ul className="space-y-2 text-sm">
             {categories.map((category) => (
@@ -66,10 +72,7 @@ function Three() {
             {filterSubject.map((course) => (
               <div
                 key={course.id}
-                className="bg-white rounded-[10px] shadow flex flex-col transition-all duration-200 w-full cursor-pointer"
-                onClick={() => {
-                  navigate("/productdescriptionpage", { state: course });
-                }}
+                className="bg-white rounded-[10px] shadow flex flex-col transition-all duration-200 w-full "
               >
                 <img
                   src={course.image}
@@ -92,18 +95,38 @@ function Three() {
                   <p>Type {course.cuisine}</p>
                 </div>
                 <div className="flex justify-between my-2 px-3">
-                  <button className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3">
+                  <button
+                    onClick={() => {
+                      navigate("/productdescriptionpage", { state: course });
+                    }}
+                    className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3"
+                  >
                     <p className="text-[#01295c] mr-1">
                       <FaShoppingCart />
                     </p>
                     Add To Cart
                   </button>
                   <p className="text-red-700">
-                    <FaRegHeart />
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => {
+                        dispatch({
+                          type: "AddToCart",
+                          payload: course,
+                        });
+                        navigate("/wishlist");
+                      }}
+                    >
+                      <FaRegHeart />
+                    </button>
                   </p>
                 </div>
                 <div className="border-t-2 flex justify-center border-gray-400">
-                  <button className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]">
+                  <button
+                  onClick={() => {
+                  navigate("/coursedescription", { state: course });
+                }}
+                   className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]">
                     View Course
                   </button>
                 </div>
