@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { CartContext } from "../Context/CartContext";
 import { MdDeleteForever } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import courseImages from "../Data/images";
+
 
 function Cart() {
   const navigate=useNavigate();
@@ -42,15 +44,16 @@ function Cart() {
               </div>
             </div>
 
-            {state.cart.map((cart) => (
+            {state.cart.map((cart,index) => (
               <div
                 key={cart.id}
                 className="flex items-center justify-between bg-gray-100 p-4 mb-4 rounded-lg shadow"
               >
                 <div className="flex items-center space-x-4">
                   <img
-                    src={cart.image}
-                    alt={cart.name}
+                    src={courseImages[index % courseImages.length].image}
+                  alt={cart.name}
+                    
                     className="w-20 h-20 object-cover rounded-lg"
                   />
                   <div>

@@ -1,13 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import { FaFacebookF, FaInstagram, FaLinkedinIn,FaHeart } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaHeart,
+} from "react-icons/fa";
 import { CartContext } from "../Context/CartContext";
 
 export default function CourseDescription() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {dispatch}=useContext(CartContext);
+  const { dispatch, state } = useContext(CartContext);
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   return (
     <div className="max-w-6xl mx-auto p-4 font-sans">
@@ -83,33 +91,38 @@ export default function CourseDescription() {
         {/* Course Side Info */}
         <div>
           <div className="bg-white shadow p-4 rounded-lg">
-            <div className=" items-center  mb-4">
-              <img
-                src={location.state?.image}
-                className="rounded-[10px]"
-                alt=""
-              />
-            </div>
+            
+              <div  className=" items-center  mb-4">
+                <img
+                  src={location.state?.image}
+                  className="rounded-[10px]"
+                  alt=""
+                />
+              </div>
+           
+
             <div className="flex items-center justify-between">
               <p className="text-xl font-bold">
-              Rs.{location.state.caloriesPerServing * 10}
-
-            </p>
-            <FaHeart className="text-lg text-red-600 cursor-pointer" />
+                Rs.{location.state.caloriesPerServing * 10}
+              </p>
+              <FaHeart className="text-lg text-red-600 cursor-pointer" />
             </div>
             <div className="flex gap-2 mt-2">
               <button
-              onClick={()=>{
-                dispatch({type:"AddToCart", payload:{...location.state}})
-                navigate("/cart");
-              }}
-               className="bg-blue-500 text-white px-4 py-2 cursor-pointer rounded">
+                onClick={() => {
+                  dispatch({
+                    type: "AddToCart",
+                    payload: { ...location.state },
+                  });
+                  navigate("/cart");
+                }}
+                className="bg-blue-500 text-white px-4 py-2 cursor-pointer rounded"
+              >
                 Add to Cart
               </button>
               <button className="border border-blue-500 text-blue-500 px-4 py-2 rounded">
                 Enroll Now
               </button>
-              
             </div>
             <ul className="text-sm text-gray-600 mt-4">
               <li>⏱️ 35 Hours</li>

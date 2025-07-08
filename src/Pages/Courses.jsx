@@ -70,7 +70,7 @@ function Three() {
         {/* Course Cards */}
         <div className="flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filterSubject.map((course,index) => (
+            {filterSubject.map((course, index) => (
               <div
                 key={course.id}
                 className="bg-white rounded-[10px] shadow flex flex-col transition-all duration-200 w-full "
@@ -99,7 +99,13 @@ function Three() {
                 <div className="flex justify-between my-2 px-3">
                   <button
                     onClick={() => {
-                      navigate("/productdescriptionpage", { state: course });
+                      navigate("/productdescriptionpage", {
+                        state: {
+                          ...course,
+                          image:
+                            courseImages[index % courseImages.length].image,
+                        },
+                      });
                     }}
                     className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3"
                   >
@@ -126,7 +132,13 @@ function Three() {
                 <div className="border-t-2 flex justify-center border-gray-400">
                   <button
                     onClick={() => {
-                      navigate("/coursedescription", { state: course });
+                      navigate("/coursedescription", {
+                        state: {
+                          ...course,
+                          image:
+                            courseImages[index % courseImages.length].image,
+                        },
+                      });
                     }}
                     className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]"
                   >

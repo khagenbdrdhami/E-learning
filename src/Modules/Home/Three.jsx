@@ -69,16 +69,16 @@ function Three() {
       </div>
 
       <div className=" grid space-y-9 grid-cols-4  justify-between ml-20">
-        {filterSubject.map((course,index) => (
+        {filterSubject.map((course, index) => (
           <div
             key={course.id}
             className="bg-white rounded-[10px]  shadow w-[250px] flex flex-col transition-all duration-200"
           >
             <img
-                  src={courseImages[index % courseImages.length].image}
-                  alt={course.name}
-                  className="h-40 w-full object-cover rounded-t-lg"
-                />
+              src={courseImages[index % courseImages.length].image}
+              alt={course.name}
+              className="h-40 w-full object-cover rounded-t-lg"
+            />
             <div className="flex justify-between mt-2 px-7">
               <p className="bg-amber-500 px-2 text-[#01295c]  rounded-2xl ">
                 Rs.{course.caloriesPerServing * 10}
@@ -97,7 +97,12 @@ function Three() {
             <div className="flex justify-between my-2  px-3">
               <button
                 onClick={() => {
-                  navigate("/productdescriptionpage", { state: course });
+                  navigate("/productdescriptionpage", {
+                    state: {
+                      ...course,
+                      image: courseImages[index % courseImages.length].image,
+                    },
+                  });
                 }}
                 className="flex items-center cursor-pointer bg-amber-500 rounded-2xl px-3 "
               >
@@ -122,7 +127,12 @@ function Three() {
             <div className="border-t-2 flex justify-center border-gray-400">
               <button
                 onClick={() => {
-                  navigate("/coursedescription", { state: course });
+                  navigate("/coursedescription", {
+                    state: {
+                      ...course,
+                      image: courseImages[index % courseImages.length].image,
+                    },
+                  });
                 }}
                 className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]"
               >
