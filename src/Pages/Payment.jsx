@@ -110,7 +110,7 @@ let Message = `total_amount=${totalAmount},transaction_uuid=${transaction_uuid},
           <input
             type="hidden"
             name="success_url"
-            value="http://localhost:5173/success"
+            value="https://e-learning-three-ochre.vercel.app/success"
           />
           <input
             type="hidden"
