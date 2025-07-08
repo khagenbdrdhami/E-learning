@@ -51,7 +51,7 @@ function Cart() {
               >
                 <div className="flex items-center space-x-4">
                   <img
-                    src={courseImages[index % courseImages.length].image}
+                    src={cart.image}
                   alt={cart.name}
                     
                     className="w-20 h-20 object-cover rounded-lg"
