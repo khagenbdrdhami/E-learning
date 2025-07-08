@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaHeart, FaGlobe } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import { CartContext } from "../Context/CartContext";
 
 // Define font style inline
 const macondoFont = { fontFamily: "'Macondo Swash Caps', cursive" };
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const { state } = useContext(CartContext);
+  const Count = state.cart.length;
   const { user, isAuthenticated } = useAuth0();
   const [showLogout, setShowLogout] = useState(false);
   const { logout } = useAuth0();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = () => {
+    if (!searchTerm.trim()) return;
+    navigate(`/search?query=${encodeURIComponent(searchTerm.trim())}`);
+  };
 
   return (
     <div className="bg-[#e2bc51] sticky top-0 z-10 text-black">
@@ -57,9 +66,7 @@ const NavBar = () => {
               className="flex items-center space-x-1 hover:border-b-2 border-black"
             >
               Contact Us
-              
             </NavLink>
-            
           </div>
         </div>
 
@@ -69,15 +76,25 @@ const NavBar = () => {
             type="text"
             placeholder="Search for anything"
             className="px-3 py-1 rounded-full bg-gray-300 text-sm w-52 focus:outline-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch();
+            }}
           />
           <div
             className="flex items-center space-x-5 text-[#01295c] relative"
             style={macondoFont}
           >
-            <FaShoppingCart
-              onClick={() => navigate("/cart")}
-              className="text-lg cursor-pointer"
-            />
+            <h1 className="flex relative">
+              <FaShoppingCart
+                onClick={() => navigate("/cart")}
+                className="text-lg cursor-pointer"
+              />
+              <p className="-ml-2 text-red-700 -mt-3 text-lg font-bold">
+                {Count}
+              </p>
+            </h1>
             <FaHeart
               onClick={() => navigate("/wishlist")}
               className="text-lg cursor-pointer"

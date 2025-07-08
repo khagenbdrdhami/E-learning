@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../../Context/CartContext";
+import courseImages from "../../Data/images";
 function Three() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [subjectList, setSubjectList] = useState([]);
@@ -68,16 +69,16 @@ function Three() {
       </div>
 
       <div className=" grid space-y-9 grid-cols-4  justify-between ml-20">
-        {filterSubject.map((course) => (
+        {filterSubject.map((course,index) => (
           <div
             key={course.id}
             className="bg-white rounded-[10px]  shadow w-[250px] flex flex-col transition-all duration-200"
           >
             <img
-              src={course.image}
-              alt={course.name}
-              className="h-40 w-full object-cover rounded-t-lg"
-            />
+                  src={courseImages[index % courseImages.length].image}
+                  alt={course.name}
+                  className="h-40 w-full object-cover rounded-t-lg"
+                />
             <div className="flex justify-between mt-2 px-7">
               <p className="bg-amber-500 px-2 text-[#01295c]  rounded-2xl ">
                 Rs.{course.caloriesPerServing * 10}

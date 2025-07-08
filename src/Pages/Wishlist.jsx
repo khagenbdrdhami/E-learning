@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
   const navigate=useNavigate();
+  
   const { state, dispatch } = useContext(CartContext);
+  
    useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

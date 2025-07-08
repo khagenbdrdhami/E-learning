@@ -34,6 +34,7 @@ import Quizzes from "./SubDashboard/Quizzes";
 import Tests from "./SubDashboard/Tests";
 import ContactUs from "./Pages/ContactUs";
 import ProtectedRoutes from "./Pages/ProtectedRoutes";
+import SearchResults from "./Pages/SearchReasults";
 
 
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/instructor" element={<ProtectedRoutes  Component={Instructor} />} />
         <Route path="/instructorprofile" element={<InstructorProfile />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
       <Footer />
     </div>

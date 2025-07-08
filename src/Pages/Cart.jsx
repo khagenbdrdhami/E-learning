@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 function Cart() {
   const navigate=useNavigate();
   const { state, dispatch } = useContext(CartContext);
+  const Count = state.cart.length;
   const totalPrice = state.cart.reduce(
     (acc, item) => acc + item.caloriesPerServing * 10 * item.qty,
     0
   );
+  
    useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -84,7 +86,7 @@ function Cart() {
               </div>
             ))}
             <div>
-              {state.cart.length > 1 ? (
+              {state.cart.length > 0 ? (
                 <div className="flex justify-between items-center border-t pt-4 mt-6">
                   <div>
                     <h2 className="text-xl font-bold text-gray-800">

@@ -3,13 +3,14 @@ import React, { useEffect, useState, useContext } from "react";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../Context/CartContext";
+import courseImages from "../Data/images";
 
 function Three() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [subjectList, setSubjectList] = useState([]);
   const [filterSubject, setFilterSubject] = useState([]);
   const [categories, setCategories] = useState([]);
-  const {dispatch}=useContext(CartContext);
+  const { dispatch } = useContext(CartContext);
 
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ function Three() {
   useEffect(() => {
     getSubject();
   }, []);
-   useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -69,16 +70,17 @@ function Three() {
         {/* Course Cards */}
         <div className="flex-1">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filterSubject.map((course) => (
+            {filterSubject.map((course,index) => (
               <div
                 key={course.id}
                 className="bg-white rounded-[10px] shadow flex flex-col transition-all duration-200 w-full "
               >
                 <img
-                  src={course.image}
+                  src={courseImages[index % courseImages.length].image}
                   alt={course.name}
                   className="h-40 w-full object-cover rounded-t-lg"
                 />
+
                 <div className="flex justify-between mt-2 px-7">
                   <p className="bg-amber-500 px-2 text-[#01295c] rounded-2xl">
                     Rs.{course.caloriesPerServing * 10}
@@ -123,10 +125,11 @@ function Three() {
                 </div>
                 <div className="border-t-2 flex justify-center border-gray-400">
                   <button
-                  onClick={() => {
-                  navigate("/coursedescription", { state: course });
-                }}
-                   className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]">
+                    onClick={() => {
+                      navigate("/coursedescription", { state: course });
+                    }}
+                    className="text-[#01295c] my-3 text-lg border-2 border-[#01295c] px-8 rounded-[10px]"
+                  >
                     View Course
                   </button>
                 </div>
